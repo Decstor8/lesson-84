@@ -22,3 +22,5 @@ const run = async () => {
       mongoose.disconnect();
     });
   };
+
+void run();
