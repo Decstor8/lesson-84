@@ -17,9 +17,14 @@ tasksRouter.get('/', auth, async (req: RequestWithUser, res, next) => {
 });
 
 tasksRouter.post('/', auth, async (req: RequestWithUser, res, next) => {
+
+  if (!req.user) {
+    return res.status(401).json({ message: "User not authenticated" });
+  }
+  
   try {
     const task = new Task({
-      user: req.body.user,
+      user: req.user._id,
       title: req.body.title,
       description: req.body.description,
       status: req.body.status,
